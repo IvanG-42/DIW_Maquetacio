@@ -1,0 +1,369 @@
+/* styles.css — Restaurant els Coberts */
+
+/* Variables*/
+:root {
+  --color-principal: #2c6e49;
+  --color-accent: #52b757;
+  --font-titol: Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding-top: 3.5rem;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Menú */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #333;
+}
+
+.menu-logo {
+  font-family: var(--font-titol);
+  color: #fff;
+}
+
+.menu-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.menu-link {
+  color: #fff;
+  border-bottom: 2px solid transparent;
+}
+
+.menu-link:hover {
+  color: var(--color-accent);
+}
+
+/* Botó reservar */
+.boto-reservar {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  background: var(--color-principal);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+}
+
+/* Capçalera */
+.capcalera {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.capcalera-imatge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.capcalera-text {
+  position: relative;
+  z-index: 1;
+  padding: 3rem;
+  color: #fff;
+  max-width: 50%;
+  background: rgba(0,0,0,0.5)
+}
+
+.capcalera-titol {
+  font-family: var(--font-titol);
+}
+
+.capcalera-titol strong {
+  color: var(--color-accent);
+}
+
+/* Seccions */
+.seccio {
+  padding: 3rem 2rem;
+}
+
+.seccio-titol {
+  font-family: var(--font-titol);
+  color: var(--color-principal);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/* Sobre nosaltres */
+.nosaltres-fila {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.nosaltres-fila.invertida {
+  flex-direction: row-reverse;
+}
+
+.nosaltres-imatge {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* Carta */
+.carta-grid {
+  display: grid;
+  grid-template-areas: "cap cap cap cap" "et1 ct1 pst ent" "et2 ct2 ama pei";
+  grid-template-columns: 4rem 1fr 1fr 1fr;
+  gap: 0.5rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+}
+
+.carta-capcalera {
+  grid-area: cap;
+  text-align: center;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+}
+
+.carta-menu-titol {
+  font-family: var(--font-titol);
+}
+
+.carta-etiqueta-1 {
+  grid-area: et1;
+}
+
+.carta-etiqueta-2 {
+  grid-area: et2;
+}
+
+.carta-etiqueta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  background: var(--color-principal);
+  color: #fff;
+}
+
+.carta-contingut-1 {
+  grid-area: ct1;
+}
+
+.carta-contingut-2 {
+  grid-area: ct2;
+}
+
+.carta-plat {
+  position: relative;
+}
+
+.carta-plat.pasta {
+  grid-area: pst;
+}
+
+.carta-plat.entrants {
+  grid-area: ent;
+}
+
+.carta-plat.amanida {
+  grid-area: ama;
+}
+
+.carta-plat.peix {
+  grid-area: pei;
+}
+
+.carta-plat-imatge {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+.carta-plat-nom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 0.25rem;
+}
+
+/* Galeria */
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.galeria-imatge {
+  width: calc(25% - 0.75rem);
+  border: 2px solid #ccc;
+}
+
+.galeria-foto {
+  width: 100%;
+  height: 130px;
+}
+
+.galeria-imatge.fosca .galeria-foto {
+  filter: brightness(0.5);
+}
+
+.galeria-imatge:hover {
+  border-color: var(--color-principal);
+}
+
+.galeria-imatge:hover .galeria-foto {
+  filter: brightness(0.35);
+}
+
+/* Formulari */
+.formulari {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.camp {
+  display: flex;
+  flex-direction: column;
+}
+
+.camp-ample {
+  grid-column: 1 / -1;
+}
+
+.camp-dreta {
+  align-items: flex-end;
+}
+
+.entrada,
+.area-text {
+  border: 1px solid #ccc;
+  padding: 0.4rem;
+  width: 100%;
+}
+
+.boto {
+  background: var(--color-principal);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+
+/* Footer */
+.foter {
+  display: flex;
+  justify-content: space-between;
+  background: #333;
+  color: #fff;
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+}
+
+.foter-logo {
+  font-family: var(--font-titol);
+  color: var(--color-accent);
+}
+
+.foter-contacte {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.foter-icona {
+  color: var(--color-accent);
+}
+
+.peu-imatge {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Responsivitat */
+@media (max-width: 900px) {
+  .carta-grid {
+    grid-template-areas: "cap cap" "et1 ct1" "et1 pst" "et1 ent" "et2 ct2" "et2 ama" "et2 pei";
+    grid-template-columns: 4rem 1fr;
+  }
+
+  .galeria-imatge {
+    width: calc(50% - 0.5rem);
+  }
+
+  .capcalera-text {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 600px) {
+  .capcalera-text {
+    max-width: 90%;
+    padding: 2rem 1rem;
+  }
+
+  .nosaltres-fila,
+  .nosaltres-fila.invertida {
+    flex-direction: column;
+  }
+
+  .nosaltres-imatge {
+    width: 100%;
+    height: 180px;
+  }
+
+  .carta-grid {
+    grid-template-areas: "cap" "et1" "ct1" "pst" "ent" "et2" "ct2" "ama" "pei";
+    grid-template-columns: 1fr;
+  }
+
+  .carta-etiqueta {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+
+  .galeria-imatge {
+    width: 100%;
+  }
+
+  .formulari {
+    grid-template-columns: 1fr;
+  }
+
+  .camp-ample {
+    grid-column: 1;
+  }
+
+  .foter {
+    flex-direction: column;
+  }
+}
