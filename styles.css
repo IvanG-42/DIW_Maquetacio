@@ -89,7 +89,7 @@ ul {
   padding: 3rem;
   color: #fff;
   max-width: 50%;
-  background: rgba(0,0,0,0.5)
+  background: rgba(0, 0, 0, 0.5)
 }
 
 .capcalera-titol {
@@ -310,3 +310,149 @@ ul {
 }
 
 /* Responsivitat Nova - Esborrada responsivitat de la primera part i canviada per la demanada a l'enunciat de la segona */
+/* Tablets: amplada màxima de 768px */
+@media (max-width: 768px) {
+
+  /* Menú: logo i links apilats verticalment i centrats */
+  .menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  body {
+    padding-top: 6rem;
+  }
+
+  /* Links del menú en columna */
+  .menu-links {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  /* Capçalera: el text ocupa més amplada */
+  .capcalera-text {
+    max-width: 80%;
+  }
+
+  /* Sobre nosaltres: imatges a amplada completa i apilades */
+  .nosaltres-fila {
+    flex-direction: column;
+  }
+
+  /* Les files invertides també s'apilen en el mateix ordre */
+  .nosaltres-fila.invertida {
+    flex-direction: column;
+  }
+
+  .nosaltres-imatge {
+    width: 100%;
+    height: 200px;
+  }
+
+  /* Carta: etiqueta+contingut a la primera fila, les dues imatges a la fila de sota */
+  .carta-grid {
+    grid-template-areas:
+      "cap  cap"
+      "et1  ct1"
+      "pst  ent"
+      "et2  ct2"
+      "ama  pei";
+    grid-template-columns: 4rem 1fr;
+  }
+
+  .carta-plat-imatge {
+    height: 160px;
+  }
+
+
+  .galeria-imatge {
+    width: calc(50% - 0.75rem);
+  }
+
+  /* Footer: centrat i sense logo */
+  .foter {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .foter-dreta {
+    display: none;
+  }
+
+  .foter-logo {
+    text-align: center;
+  }
+
+  .foter-contacte {
+    justify-content: center;
+  }
+}
+
+/* Mòbils: amplada màxima de 576px */
+@media (max-width: 576px) {
+
+  body {
+    padding-top: 8rem;
+  }
+
+  .capcalera-text {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+
+  /* Carta: cada element ocupa tota l'amplada en columna única */
+  .carta-grid {
+    grid-template-areas:
+      "cap"
+      "et1"
+      "ct1"
+      "pst"
+      "ent"
+      "et2"
+      "ct2"
+      "ama"
+      "pei";
+    grid-template-columns: 1fr;
+  }
+
+  /* L'etiqueta en mòbil es mostra horitzontal */
+  .carta-etiqueta {
+    writing-mode: horizontal-tb;
+    transform: none;
+    padding: 0.5rem;
+  }
+
+  .carta-plat-imatge {
+    height: 180px;
+  }
+
+  .galeria-imatge {
+    width: 100%;
+  }
+
+  .galeria-foto {
+    height: 180px;
+  }
+
+  .formulari {
+    grid-template-columns: 1fr;
+  }
+
+  .camp-ample {
+    grid-column: 1;
+  }
+
+  /* Botó centrat i ample */
+  .camp-dreta {
+    align-items: center;
+  }
+
+  .boto {
+    width: 100%;
+    padding: 0.75rem;
+  }
+}
