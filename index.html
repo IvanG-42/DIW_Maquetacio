@@ -12,7 +12,9 @@
 <body>
   <!--Totas les imatges i continguts els he tret de la pàgina oficial del restaurant "El Nacional" (https://www.elnacionalbcn.com/galeria-de-fotos/)-->
   <!--Els textos auxiliars (Menus, subtituls i cosas per l'estil) han siguts generats per una IA (Jo ho posso per si de cas, que consti)-->
-  <nav class="menu">
+
+  <!-- EX5: El menú té la classe "menu" que s'encongeix amb scroll via JS -->
+  <nav class="menu" id="menu-principal">
     <div class="menu-logo">Restaurant els Coberts</div>
     <ul class="menu-links">
       <li><a href="#nosaltres" class="menu-link">Nosaltres</a></li>
@@ -25,6 +27,7 @@
 
   <header class="capcalera">
     <img src="img/La-Taperia-1.png" alt="Interior del Restaurant els Coberts" class="capcalera-imatge" />
+    <!-- EX2.1: El text de la capçalera té l'animació apareix-amunt aplicada al CSS -->
     <div class="capcalera-text">
       <h1 class="capcalera-titol">Restaurant els <strong>Coberts</strong></h1>
       <p class="capcalera-subtitol">Un espai únic on descobrir diferents propostes de la gastronomia mediterrània en un sol lloc.</p>
@@ -84,6 +87,8 @@
 
     <section id="galeria" class="seccio">
       <h2 class="seccio-titol">Galeria d'imatges</h2>
+      <!-- EX1.1: Les imatges de la galeria tenen transició scale+rotate+grayscale al hover (veure CSS .galeria-foto) -->
+      <!-- overflow:hidden al .galeria-imatge evita que la imatge es mostri fora de l'àrea pare -->
       <div class="galeria">
         <div class="galeria-imatge fosca"><img src="img/Galeria1.png" alt="Interior del restaurant" class="galeria-foto" /></div>
         <div class="galeria-imatge">        <img src="img/Galeria2.png" alt="Espai gastronòmic" class="galeria-foto" /></div>
@@ -93,6 +98,31 @@
         <div class="galeria-imatge">        <img src="img/Galeria6.png" alt="Zona de taules" class="galeria-foto" /></div>
         <div class="galeria-imatge">        <img src="img/Galeria7.png" alt="Decoració interior" class="galeria-foto" /></div>
         <div class="galeria-imatge fosca"><img src="img/Galeria8.png" alt="Vista general del restaurant" class="galeria-foto" /></div>
+      </div>
+    </section>
+
+    <!-- EX3 i EX4: Nou apartat de vídeo després de la galeria -->
+    <section id="video" class="seccio">
+      <h2 class="seccio-titol">Vídeos del restaurant</h2>
+      <!-- EX3: Vídeo centrat, responsive, per defecte parat i silenciat amb controls visibles -->
+      <!-- EX4: S'han amagat els controls nadius i s'han creat controls propis amb icones de Material Icons -->
+      <div class="video-contenidor">
+        <!-- controls s'amaga via CSS (display:none) i es substitueix pels controls propis -->
+        <video id="video-restaurant" class="video-element" muted preload="metadata">
+          <source src="img/video-restaurant.mp4" type="video/mp4" />
+          El teu navegador no suporta el vídeo HTML5.
+        </video>
+        <!-- EX4: Capa de controls propis sobre el vídeo  -->
+        <div class="video-controls">
+          <!-- EX4.6: Icona play - posa el vídeo en marxa -->
+          <span class="material-icons video-icona" id="btn-play" title="Reproduir">play_circle</span>
+          <!-- EX4.7: Icona pause - pausa el vídeo -->
+          <span class="material-icons video-icona" id="btn-pause" title="Pausar">pause_circle</span>
+          <!-- EX4.8: Icona volum - activa el so -->
+          <span class="material-icons video-icona" id="btn-volum" title="Activar so">volume_up</span>
+          <!-- EX4.9: Icona silenci - posa el vídeo en silenci -->
+          <span class="material-icons video-icona" id="btn-silenci" title="Silenciar">volume_off</span>
+        </div>
       </div>
     </section>
 
@@ -143,6 +173,58 @@
       <img src="img/Icon.png" alt="Logotip del restaurant" class="peu-imatge" />
     </div>
   </footer>
+
+  <!-- EX4 i EX5: JavaScript -->
+  <script>
+    /* ===== EX4: Controls propis del vídeo ===== */
+    const video = document.getElementById('video-restaurant');
+    const btnPlay = document.getElementById('btn-play');
+    const btnPause = document.getElementById('btn-pause');
+    const btnVolum = document.getElementById('btn-volum');
+    const btnSilenci = document.getElementById('btn-silenci');
+
+    /* EX4.6: Play */
+    btnPlay.addEventListener('click', function () {
+      video.play();
+    });
+
+    /* EX4.7: Pause */
+    btnPause.addEventListener('click', function () {
+      video.pause();
+    });
+
+    /* EX4.8: Activar volum */
+    btnVolum.addEventListener('click', function () {
+      video.muted = false;
+    });
+
+    /* EX4.9: Silenciar */
+    btnSilenci.addEventListener('click', function () {
+      video.muted = true;
+    });
+
+    /* ===== EX5.1: Navbar shrink en scroll ===== */
+    window.addEventListener('scroll', function () {
+      const menu = document.getElementById('menu-principal');
+      if (window.scrollY > 80) {
+        menu.classList.add('menu-petit');
+      } else {
+        menu.classList.remove('menu-petit');
+      }
+    });
+
+    /* ===== EX5.2: Autoplay del vídeo quan arriba a la secció de vídeo amb scroll ===== */
+    window.addEventListener('scroll', function () {
+      const seccioVideo = document.getElementById('video');
+      const rect = seccioVideo.getBoundingClientRect();
+      /* Si la secció de vídeo és visible a la pantalla, es posa en marxa */
+      if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+        if (video.paused) {
+          video.play();
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>

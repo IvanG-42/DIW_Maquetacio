@@ -34,11 +34,26 @@ ul {
   align-items: center;
   padding: 1rem 2rem;
   background: #333;
+  /* EX5.1: Transició per a l'efecte de shrink en fer scroll */
+  transition: padding 0.3s ease, background 0.3s ease;
+}
+
+/* EX5.1: Estat del menú encongit quan l'usuari fa scroll */
+.menu.menu-petit {
+  padding: 0.4rem 2rem;
+  background: #111;
 }
 
 .menu-logo {
   font-family: var(--font-titol);
   color: #fff;
+  /* EX5.1: Transició del tamany del logo quan s'encongeix el menú */
+  transition: font-size 0.3s ease;
+}
+
+/* EX5.1: El logo s'encongeix quan el menú és petit */
+.menu.menu-petit .menu-logo {
+  font-size: 0.85rem;
 }
 
 .menu-links {
@@ -89,7 +104,9 @@ ul {
   padding: 3rem;
   color: #fff;
   max-width: 50%;
-  background: rgba(0, 0, 0, 0.5)
+  background: rgba(0, 0, 0, 0.5);
+  /* EX2.1: Animació d'aparició del text de la capçalera en carregar la pàgina */
+  animation: apareix-amunt 2.5s ease forwards;
 }
 
 .capcalera-titol {
@@ -98,6 +115,36 @@ ul {
 
 .capcalera-titol strong {
   color: var(--color-accent);
+}
+
+/* ===== EX2.1: Keyframes de l'animació del text de la capçalera =====
+   - 0%:   invisible, a baix, color taronja
+   - 40%:  comença a aparèixer, puja, color taronja
+   - 70%:  segueix pujant, color taronja
+   - 100%: totalment visible, posició final, color blanc
+   S'ha de quedar en l'estat final (forwards)
+*/
+@keyframes apareix-amunt {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+    color: orange;
+  }
+  40% {
+    opacity: 0.4;
+    transform: translateY(40px);
+    color: orange;
+  }
+  70% {
+    opacity: 0.75;
+    transform: translateY(15px);
+    color: orange;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    color: #fff;
+  }
 }
 
 /* Seccions */
@@ -124,11 +171,21 @@ ul {
   flex-direction: row-reverse;
 }
 
+/* EX1.2: Transició pròpia en les imatges de "Sobre nosaltres"
+   Utilitza 3 propietats CSS: opacity, transform i box-shadow
+   S'activa en fer hover sobre la imatge */
 .nosaltres-imatge {
   width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 0.5rem;
+  transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.nosaltres-imatge:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* Carta */
@@ -223,26 +280,106 @@ ul {
   gap: 0.75rem;
 }
 
+/* EX1.1: overflow:hidden per evitar que la imatge surti de l'àrea del pare quan s'escala */
 .galeria-imatge {
   width: calc(25% - 0.75rem);
   border: 2px solid #ccc;
+  overflow: hidden;
 }
 
+/* EX2.2: Animació pròpia amb 4 frames i 3 propietats: opacity, border-color i box-shadow
+   S'aplica en el hover de cada element de la galeria */
+.galeria-imatge:hover {
+  border-color: var(--color-principal);
+  animation: ressaltar-galeria 0.6s ease forwards;
+}
+
+/* EX2.2: Animació amb 4 keyframes que canvia opacity, border-color i box-shadow */
+@keyframes ressaltar-galeria {
+  0% {
+    opacity: 1;
+    border-color: #ccc;
+    box-shadow: none;
+  }
+  33% {
+    opacity: 0.85;
+    border-color: var(--color-accent);
+    box-shadow: 0 2px 8px rgba(44, 110, 73, 0.3);
+  }
+  66% {
+    opacity: 0.95;
+    border-color: var(--color-principal);
+    box-shadow: 0 4px 16px rgba(44, 110, 73, 0.5);
+  }
+  100% {
+    opacity: 1;
+    border-color: var(--color-principal);
+    box-shadow: 0 4px 16px rgba(44, 110, 73, 0.5);
+  }
+}
+
+/* EX1.1: La imatge de la galeria té transició amb scale, rotate i grayscale al fer hover */
 .galeria-foto {
   width: 100%;
   height: 130px;
+  /* EX1.1: Transició aplicada a la imatge: scale, rotate i grayscale */
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
 
 .galeria-imatge.fosca .galeria-foto {
   filter: brightness(0.5);
 }
 
-.galeria-imatge:hover {
-  border-color: var(--color-principal);
+/* EX1.1: Al fer hover, la imatge s'escala, rota i passa a escala de grisos */
+.galeria-imatge:hover .galeria-foto {
+  transform: scale(1.1) rotate(2deg);
+  filter: grayscale(1) brightness(0.35);
 }
 
-.galeria-imatge:hover .galeria-foto {
-  filter: brightness(0.35);
+/* ===== EX3 i EX4: Secció de vídeo ===== */
+
+/* EX3: El contenidor del vídeo centrat i responsive */
+.video-contenidor {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: 640px;
+  width: 100%;
+}
+
+/* EX3: El vídeo ocupa tota l'amplada del contenidor i no provoca scroll horitzontal */
+.video-element {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* EX4: S'amaguen els controls nadius del navegador */
+}
+
+/* EX4: Capa de controls propis sobre el vídeo amb fons fosc i transparent */
+.video-controls {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* EX4: Icones dels controls del vídeo */
+.video-icona {
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.75rem;
+  /* EX4.3: Transició per a l'efecte shadow en fer hover sobre la icona */
+  transition: text-shadow 0.2s ease, color 0.2s ease;
+}
+
+/* EX4.3: Al passar el mouse per sobre la icona apareix un efecte de shadow */
+.video-icona:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 /* Formulari */
